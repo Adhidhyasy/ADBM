@@ -1,0 +1,69 @@
+a)display the sum of first n natural numbers
+
+"for get output
+1.enter (set serveroutput on)
+2.after enter below code"
+
+
+declare
+n number(2);
+i number(2);
+sum1 number(4):=0;
+begin
+n:=&n;
+for i in 1..n
+loop
+sum1:= sum1 + i;
+end loop;
+dbms_output.put_line('sum of first '||n||' natural numbers are: '||sum1);
+end;
+/
+
+    OUTPUT:
+
+  	Enter value for n: 4
+	old   5: n:=&n;
+	new   5: n:=4;
+	sum of first 4 natural numbers are: 10
+
+	PL/SQL procedure successfully completed.
+
+
+
+b)display the prime numbers present in any range
+
+declare
+num number(3);
+flag number(2):=0;
+begin
+num:=&num;
+for numbers in 2..num
+loop
+flag:=0;
+for j in 2..numbers/2
+loop
+if mod(numbers,j)=0
+then
+flag:=1;
+exit;
+end if;
+end loop;
+if flag=0
+then
+dbms_output.put_line(numbers);
+end if;
+end loop;
+end;
+/
+
+   OUTPUT:
+
+	Enter value for num: 10
+	old   5: num:=&num;
+	new   5: num:=10;
+	2
+	3
+	5
+	7
+
+	PL/SQL procedure successfully completed.
