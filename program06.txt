@@ -1,0 +1,56 @@
+create table student14(id numeric(3),name varchar(15),mark numeric(4),constraint stt14 primary key(id));
+desc student14;
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(15)
+ MARK                                               NUMBER(4)
+
+insert into student14 values(1,'Adhi',90);
+insert into student14 values(2,'preethi',80);
+insert into student14 values(3,'mahima',85);
+select * from student14;
+
+        ID NAME                  MARK
+---------- --------------- ----------
+         1 Adhi                    90
+         2 preethi                 80
+         3 mahima                  85
+
+a)
+1.usge of commit
+commit;
+
+Commit complete.
+
+2.usage of savepoint 
+Savepoint s1;
+
+Savepoint created.
+
+3.usage of rollback
+Rollback to s1;
+
+Rollback complete.
+
+b)
+SQL> grant select on student14 to new_stud;
+
+Grant succeeded.
+
+SQL> grant update(name) on student14 to new_stud;
+
+Grant succeeded.
+
+SQL> revoke select on student14 from new_stud;
+
+Revoke succeeded.
+
+SQL> revoke update on student14 from new_stud;
+
+Revoke succeeded.
+
+c) create role new_stud;
+Role created.
+
