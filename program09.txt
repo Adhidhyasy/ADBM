@@ -16,13 +16,12 @@ insert into hotel03 values(104,'abcd hotel',02,900);
 insert into hotel03 values(105,'kids hotel',04,400);
 select * from hotel03;
 
-
        HID NAME                 NO_OF_ROOMS RATE_PER_DAY
 ---------- -------------------- ----------- ------------
        101 ammu hotel                     2          200
-       102 revathy hotel                  1          100
-       103 lulu hotel                     3          300
-       104 abcd hotel                     2          200
+       102 revathy hotel                  1         1000
+       103 lulu hotel                     3         3000
+       104 abcd hotel                     2          900
        105 kids hotel                     4          400
 
 create table guest03(g_id numeric(3),name varchar(20),no_of_days numeric(3),hid numeric(6),cons
