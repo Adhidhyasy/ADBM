@@ -1,10 +1,7 @@
 a)display the sum of first n natural numbers
 
-"for get output
-1.enter (set serveroutput on)
-2.after enter below code"
 
-
+set serveroutput on
 declare
 n number(2);
 i number(2);
@@ -27,8 +24,6 @@ end;
 	sum of first 4 natural numbers are: 10
 
 	PL/SQL procedure successfully completed.
-
-
 
 b)display the prime numbers present in any range
 
