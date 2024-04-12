@@ -64,12 +64,6 @@ desc staff13;
  SALARY                                             NUMBER(15)
  CITY                                               VARCHAR2(20)
 
-SQL> 
-SQL> 
-SQL> 
-
-SQL> 
-SQL> 
 
 insert into department13 values(101,'MCA');
 insert into department13 values(102,'MBA');
