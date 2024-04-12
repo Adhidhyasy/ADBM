@@ -1,0 +1,117 @@
+create table hotel03(hid numeric(3),name varchar(20),no_of_rooms numeric(3),rate_per_day 
+numeric(6),constraint hd03 primary key(hid));
+desc hotel03;
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ HID                                       NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(20)
+ NO_OF_ROOMS                                        NUMBER(3)
+ RATE_PER_DAY                                       NUMBER(6)
+
+insert into hotel03 values(101,'ammu hotel',02,200);
+insert into hotel03 values(102,'revathy hotel',01,1000);
+insert into hotel03 values(103,'lulu hotel',03,3000);
+insert into hotel03 values(104,'abcd hotel',02,900);
+insert into hotel03 values(105,'kids hotel',04,400);
+select * from hotel03;
+
+
+       HID NAME                 NO_OF_ROOMS RATE_PER_DAY
+---------- -------------------- ----------- ------------
+       101 ammu hotel                     2          200
+       102 revathy hotel                  1          100
+       103 lulu hotel                     3          300
+       104 abcd hotel                     2          200
+       105 kids hotel                     4          400
+
+create table guest03(g_id numeric(3),name varchar(20),no_of_days numeric(3),hid numeric(6),cons
+traint gt03 primary key(g_id));
+desc guest03;
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ G_ID                                      NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(20)
+ NO_OF_DAYS                                         NUMBER(3)
+ HID                                                NUMBER(6)
+
+insert into guest03 values(100,'ammu',01,101);
+insert into guest03 values(101,'sachin',05,102);
+insert into guest03 values(102,'rakul',06,103);
+insert into guest03 values(103,'raman',03,104);
+insert into guest03 values(104,'achu',02,105);
+select * from guest03;
+
+      G_ID NAME                 NO_OF_DAYS        HID
+---------- -------------------- ---------- ----------
+       101 sachin                        5        102
+       102 rakul                         6        103
+       103 raman                         3        104
+       104 achu                          2        105
+       100 ammu                          1        101
+
+
+alter table guest03 add constraint gt2 foreign key(hid) references hotel03(hid);
+
+a) set serveroutput on
+   declare 
+   amt number(10);
+   cursor rent_cur is select g.g_id,g.name,g.no_of_days,g.hid,h.rate_per_day from guest03 g,hotel03 h where g.hid=h.hid;
+   id guest03.g_id % type;
+   name guest03.name % type;
+   days guest03.no_of_days % type;
+   hid guest03.hid % type;
+   rate hotel03.rate_per_day % type;
+   begin
+   open rent_cur;
+   dbms_output.put_line('Id  '||'Name  '||'Days  '||'HotelId  '||'Rate');
+   loop
+   fetch rent_cur into id,name,days,hid,rate;
+   exit when rent_cur % notfound;
+   amt:=0;
+   amt:=rate*days;
+   dbms_output.put_line(id||' '||name||' '||days||' '||hid||' '||amt);
+   end loop;
+   close rent_cur;
+   end;
+   /
+
+   output:
+         
+     	Id  Name   Days  HotelId  Rate
+       100  ammu      1      101   200
+       101  sachin    5      102   500
+       102  rakul     6      103  1800
+       103  raman     3      104   600
+       104  achu      2      105   800
+
+    PL/SQL procedure successfully completed.
+
+b) set serveroutput on
+   declare
+   cursor h_details is select hid,name,no_of_rooms,rate_per_day from hotel03 h where rate_per_day>500;
+   id hotel03.hid %type;
+   name hotel03.name %type;
+   room hotel03.no_of_rooms %type;
+   rate hotel03.rate_per_day %type;
+   begin
+   open h_details;
+   dbms_output.put_line('ID   '||'NAME    '||'ROOM     '||'RATE   ');
+   loop
+   fetch h_details into id,name,room,rate;
+   exit when h_details % notfound;
+   dbms_output.put_line(id||'  '||name||'   '||room||'   '||rate);
+   end loop;
+   close h_details;
+   end;
+   /
+ 
+   output:
+          
+          ID   NAME           ROOM     RATE
+          102  revathy hotel     1     1000
+          103  lulu hotel        3     3000
+          104  abcd hotel        2      900
+
+         PL/SQL procedure successfully completed.
